@@ -40,15 +40,11 @@ public class MainActivity extends AppCompatActivity {
         // Show a MaterialDatePicker when the button is clicked.
         final Button button = findViewById(R.id.button);
         button.setOnClickListener(v -> {
-            try {
-                // setup: CalendarConstraints.Builder
-                final CalendarConstraints.Builder calendarConstraints =
-                        setupConstraintsBuilder(defaultSelectionTimeInMillis, lowerBound);
-                // show MaterialDatePicker.
-                showMaterialDatePicker(calendarConstraints, defaultSelectionTimeInMillis);
-            } catch (IllegalArgumentException exception) {
-                showToast(exception.getLocalizedMessage());
-            }
+            // setup: CalendarConstraints.Builder
+            final CalendarConstraints.Builder calendarConstraints =
+                    setupConstraintsBuilder(defaultSelectionTimeInMillis, lowerBound);
+            // show MaterialDatePicker.
+            showMaterialDatePicker(calendarConstraints, defaultSelectionTimeInMillis);
         });
     }
 

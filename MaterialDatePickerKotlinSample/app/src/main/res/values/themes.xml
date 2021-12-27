@@ -14,14 +14,14 @@
         <!-- Customize your theme here. -->
 
         <!-- Style1: Dialog version. -->
-<!--        <item name="materialCalendarTheme">-->
-<!--            @style/ThemeOverlay.MaterialComponents.MaterialCalendar-->
-<!--        </item>-->
+        <!--        <item name="materialCalendarTheme">-->
+        <!--            @style/ThemeOverlay.MaterialComponents.MaterialCalendar-->
+        <!--        </item>-->
 
         <!-- Style2: Fullscreen version. -->
-<!--        <item name="materialCalendarTheme">-->
-<!--            @style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen-->
-<!--        </item>-->
+        <!--        <item name="materialCalendarTheme">-->
+        <!--            @style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen-->
+        <!--        </item>-->
 
         <!-- Style3: Custom Dialog -->
         <item name="materialCalendarTheme">
