@@ -1,6 +1,5 @@
 package com.example.materialdatepickerjavasample
 
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import android.os.Bundle

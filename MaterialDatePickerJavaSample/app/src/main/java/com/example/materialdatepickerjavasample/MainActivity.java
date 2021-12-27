@@ -78,10 +78,6 @@ public class MainActivity extends AppCompatActivity {
             CalendarConstraints.Builder calendarConstraints,
             long defaultSelectionTimeInMillis) {
 
-        if (datePicker != null && datePicker.getSelection() != null) {
-            defaultSelectionTimeInMillis = datePicker.getSelection();
-        }
-
         datePicker =
                 MaterialDatePicker.Builder.datePicker()
                         .setCalendarConstraints(calendarConstraints.build())
