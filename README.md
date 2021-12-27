@@ -14,6 +14,10 @@ Java / Kotlin / sample collection using [MaterialDatePicker](https://material.io
 [Java](https://github.com/LeoAndo/android-material-date-picker-samples/tree/main/MaterialDatePickerJavaSample)<br>
 [Kotlin](https://github.com/LeoAndo/android-material-date-picker-samples/tree/main/MaterialDatePickerKotlinSample)<br>
 
+Please enable comment out and switch styles<br>
+https://github.com/LeoAndo/android-material-date-picker-samples/blob/main/MaterialDatePickerJavaSample/app/src/main/res/values/themes.xml#L16:L29<br>
+
+
 # refs
 https://material.io/components/date-pickers/android#using-date-pickers<br>
 https://github.com/material-components/material-components-android<br>
