@@ -40,11 +40,15 @@ public class MainActivity extends AppCompatActivity {
         // Show a MaterialDatePicker when the button is clicked.
         final Button button = findViewById(R.id.button);
         button.setOnClickListener(v -> {
+            long dateTimemillis = defaultSelectionTimeInMillis;
+            if (datePicker != null && datePicker.getSelection() != null) {
+                dateTimemillis = datePicker.getSelection();
+            }
             // setup: CalendarConstraints.Builder
             final CalendarConstraints.Builder calendarConstraints =
-                    setupConstraintsBuilder(defaultSelectionTimeInMillis, lowerBound);
+                    setupConstraintsBuilder(dateTimemillis, lowerBound);
             // show MaterialDatePicker.
-            showMaterialDatePicker(calendarConstraints, defaultSelectionTimeInMillis);
+            showMaterialDatePicker(calendarConstraints, dateTimemillis);
         });
     }
 
@@ -56,10 +60,6 @@ public class MainActivity extends AppCompatActivity {
      * @return Constraints for calender. {@link CalendarConstraints.Builder}
      */
     private CalendarConstraints.Builder setupConstraintsBuilder(long openingDateTimeInMillis, long lowerBound) {
-        if (datePicker != null && datePicker.getSelection() != null) {
-            openingDateTimeInMillis = datePicker.getSelection();
-        }
-
         CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
         // setup: default opening Date.
         constraintsBuilder.setOpenAt(openingDateTimeInMillis);
