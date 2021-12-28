@@ -1,7 +1,7 @@
 # Overview
 
 Java / Kotlin / sample collection using [MaterialDatePicker](https://material.io/components/date-pickers/android#using-date-pickers)<br>
-"Jetpack compose" version is implementation later.<br>
+"Jetpack compose" version is implementation later....<br>
 
 # development envirnment
 
