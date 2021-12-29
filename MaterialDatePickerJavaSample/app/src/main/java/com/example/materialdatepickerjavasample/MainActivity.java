@@ -9,10 +9,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.CompositeDateValidator;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
             // setup: CalendarConstraints.Builder
             final CalendarConstraints.Builder calendarConstraints =
-                    setupConstraintsBuilder(dateTimemillis, lowerBound);
+                    setupConstraintsBuilder(dateTimemillis, lowerBound, today);
             // show MaterialDatePicker.
             showMaterialDatePicker(calendarConstraints, dateTimemillis);
         });
@@ -57,15 +61,23 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param openingDateTimeInMillis default opening Date (A UTC time In Milliseconds)
      * @param lowerBound              Lower limit setting of selection range (A UTC time In Milliseconds)
+     * @param higherBound             Higher limit setting of selection range (A UTC time In Milliseconds)
      * @return Constraints for calender. {@link CalendarConstraints.Builder}
      */
-    private CalendarConstraints.Builder setupConstraintsBuilder(long openingDateTimeInMillis, long lowerBound) {
-        CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
-        // setup: default opening Date.
-        constraintsBuilder.setOpenAt(openingDateTimeInMillis);
-        // setup: validation.
-        constraintsBuilder.setValidator(DateValidatorPointForward.from(lowerBound));
-        return constraintsBuilder;
+    private CalendarConstraints.Builder setupConstraintsBuilder(
+            long openingDateTimeInMillis,
+            long lowerBound,
+            long higherBound) {
+
+        List<CalendarConstraints.DateValidator> validators = new ArrayList<>();
+        validators.add(DateValidatorPointForward.from(lowerBound));
+        validators.add(DateValidatorPointBackward.now());
+
+        return new CalendarConstraints.Builder()
+                .setOpenAt(openingDateTimeInMillis) // setup: opening Date.
+                .setStart(lowerBound)
+                .setEnd(higherBound)
+                .setValidator(CompositeDateValidator.allOf(validators)); // setup: validation.
     }
 
     /**

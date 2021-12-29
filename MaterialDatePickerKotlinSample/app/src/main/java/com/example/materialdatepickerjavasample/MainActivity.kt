@@ -1,16 +1,15 @@
 package com.example.materialdatepickerjavasample
 
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.datepicker.MaterialDatePicker
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.View
 import android.widget.Button
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointForward
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.datepicker.*
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     private var datePicker: MaterialDatePicker<Long>? = null
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             val dateTimeInMillis = datePicker?.selection ?: defaultSelectionTimeInMillis
             // setup: CalendarConstraints.Builder
             val calendarConstraints =
-                setupConstraintsBuilder(dateTimeInMillis, lowerBound)
+                setupConstraintsBuilder(dateTimeInMillis, lowerBound, today)
             // show MaterialDatePicker.
             showMaterialDatePicker(calendarConstraints, dateTimeInMillis)
         }
@@ -48,18 +47,22 @@ class MainActivity : AppCompatActivity() {
      *
      * @param openingDateTimeInMillis default opening Date (A UTC time In Milliseconds)
      * @param lowerBound              Lower limit setting of selection range (A UTC time In Milliseconds)
+     * @param higherBound             Higher limit setting of selection range (A UTC time In Milliseconds)
      * @return Constraints for calender. [CalendarConstraints.Builder]
      */
     private fun setupConstraintsBuilder(
         openingDateTimeInMillis: Long,
-        lowerBound: Long
+        lowerBound: Long,
+        higherBound: Long
     ): CalendarConstraints.Builder {
-        val constraintsBuilder = CalendarConstraints.Builder()
-        // setup: default opening Date.
-        constraintsBuilder.setOpenAt(openingDateTimeInMillis)
-        // setup: validation.
-        constraintsBuilder.setValidator(DateValidatorPointForward.from(lowerBound))
-        return constraintsBuilder
+        val validators: MutableList<CalendarConstraints.DateValidator> = mutableListOf()
+        validators.add(DateValidatorPointForward.from(lowerBound))
+        validators.add(DateValidatorPointBackward.now())
+        return CalendarConstraints.Builder()
+            .setOpenAt(openingDateTimeInMillis)  // setup: opening Date.
+            .setStart(lowerBound)
+            .setEnd(higherBound)
+            .setValidator(CompositeDateValidator.allOf(validators)) // setup: validation.
     }
 
     /**
